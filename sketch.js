@@ -27,7 +27,7 @@ var gameSound;
     e7=loadImage("assets/e7.png");
     crosshairImg = loadImage("assets/Crosshair.png");
     destroyImg = loadImage("assets/Destroy.png")
-   // gameSound=loadSound("assets/Laser.mp3");
+    gameSound=loadSound("assets/Laser.mp3");
     
 }
 
@@ -69,10 +69,16 @@ function draw() {
   
 
   background(backgroundImg);
+ 
   drawSprites();
 
   if (gameState===PLAY)
   { 
+    textSize(42);
+    fill("red")
+    stroke("yellow");
+    text("(PRESS SPACE TO SHOOT)",displayWidth/2-200,100);
+    
   crosshair.y=mouseY;
   spaceShip.bounceOff(edges);
 
@@ -86,7 +92,8 @@ function draw() {
   
   if(keyDown("space")&& crosshair.isTouching(alienGroup)){
     alienGroup.destroyEach();
-  //  gameSound.play();
+    gameSound.play(); 
+    text.visible='true'
   }
   
 if(proWall.isTouching(alienGroup) && health>=0){
@@ -104,8 +111,7 @@ stroke(rgb(4, 247, 4));
 }else if(health>=40 && health<60){
   stroke(rgb(255, 143, 53));
 }else if(health>=20 && health<40){
-  stroke(rgb(255, 95, 73));
-}else if (health>0 && health<20){
+  stroke(rgb(255, 95, 73)); 
   stroke(rgb(255, 0, 0));
 }
 noFill();
